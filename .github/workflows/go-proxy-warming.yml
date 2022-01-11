@@ -1,4 +1,4 @@
-name: "Go proxy warming"
+name: "pkg.go.dev"
 
 on:
   release:
