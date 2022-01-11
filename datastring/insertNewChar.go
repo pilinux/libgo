@@ -1,5 +1,5 @@
-// Package string implements functions to manipulate UTF-8 encoded strings
-package string
+// Package datastring implements functions to manipulate UTF-8 encoded strings
+package datastring
 
 import (
 	"bytes"

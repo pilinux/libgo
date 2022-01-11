@@ -1,14 +1,14 @@
-package string_test
+package datastring_test
 
 import (
 	"testing"
 
-	"github.com/pilinux/libgo/string"
+	"github.com/pilinux/libgo/datastring"
 )
 
 func TestInsertNewCharNthPosition(t *testing.T) {
 	input := "12345678123456781234567812345678"
-	result := string.InsertNewCharNthPosition(input, 8, '-')
+	result := datastring.InsertNewCharNthPosition(input, 8, '-')
 	expected := "12345678-12345678-12345678-12345678"
 
 	if result != expected {
