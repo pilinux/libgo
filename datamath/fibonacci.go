@@ -1,12 +1,15 @@
-// Package datamath provides mathematical functions which are not implemented in the standard library.
 package datamath
 
 // FibonacciNthTerm returns the n-th term from the Fibonacci sequence.
+//
 // The Fibonacci sequence is 0 (0th term), 1 (1st term), 1 (2nd term), 2 (3rd term), 3 (4th term),
 // 5 (5th term), 8 (6th term), 13 (7th term), 21 (8th term), 34 (9th term), ...
+//
 // Example: FibonacciNthTerm(8) = 21
 //
+//
 // FibonacciNthTerm extends the Fibonacci numbers to negative integers also.
+//
 // Example: FibonacciNthTerm(-8) = -21
 func FibonacciNthTerm(x int) int {
 	signX := IntSign(x)

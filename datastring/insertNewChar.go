@@ -10,8 +10,11 @@ import (
 // a UTF-8 formatted string
 //
 // Example:
+//
 // input := "12345678123456781234567812345678"
+//
 // result := InsertNewCharNthPosition(input, 8, '-')
+//
 // result will be "12345678-12345678-12345678-12345678"
 func InsertNewCharNthPosition(s string, n int, r rune) string {
 	var buffer bytes.Buffer
