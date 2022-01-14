@@ -12,6 +12,14 @@
 
 Custom Golang libraries developed during doing real-life projects.
 
+## Import
+
+```
+import (
+    "github.com/pilinux/libgo"
+)
+```
+
 ## License
 
 &#169; piLinux 2022
