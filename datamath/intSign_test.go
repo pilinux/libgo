@@ -70,5 +70,4 @@ func TestIntSign(t *testing.T) {
 			result6, expected6,
 		)
 	}
-
 }

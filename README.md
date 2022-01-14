@@ -14,7 +14,7 @@ Custom Golang libraries developed during doing real-life projects.
 
 ## Import
 
-```
+```go
 import (
     "github.com/pilinux/libgo"
 )
