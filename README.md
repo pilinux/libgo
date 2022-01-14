@@ -30,7 +30,7 @@ Released under the [MIT license][13]
 [02]: https://github.com/pilinux/libgo/actions/workflows/go.yml/badge.svg
 [03]: https://codecov.io/gh/pilinux/libgo/branch/main/graph/badge.svg?token=Z9T0HAOTH7
 [04]: https://codecov.io/gh/pilinux/libgo
-[05]: https://github.com/pilinux/libgo/actions/workflows/super-linter.yml/badge.svg
+[05]: https://github.com/pilinux/libgo/actions/workflows/golangci-lint.yml/badge.svg
 [06]: https://goreportcard.com/badge/github.com/pilinux/libgo
 [07]: https://goreportcard.com/report/github.com/pilinux/libgo
 [08]: https://www.codefactor.io/repository/github/pilinux/libgo/badge
