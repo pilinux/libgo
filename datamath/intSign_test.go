@@ -1,4 +1,3 @@
-// Package datamath provides mathematical functions which are not implemented in the standard library.
 package datamath_test
 
 import (
