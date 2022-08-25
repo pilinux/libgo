@@ -1,342 +1,67 @@
 package timestring_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pilinux/libgo/timestring"
 )
 
+type hourMinuteSecondTest struct {
+	input    uint64
+	expected string
+}
+
+var hourMinuteSecondTests = []hourMinuteSecondTest{
+	{0, "0 second"},
+	{1, "1 second"},
+	{59, "59 seconds"},
+	{60, "1 minute"},
+	{61, "1 minute 1 second"},
+	{119, "1 minute 59 seconds"},
+	{120, "2 minutes"},
+	{121, "2 minutes 1 second"},
+	{179, "2 minutes 59 seconds"},
+	{3540, "59 minutes"},
+	{3541, "59 minutes 1 second"},
+	{3599, "59 minutes 59 seconds"},
+	{3600, "1 hour"},
+	{3601, "1 hour 1 second"},
+	{3659, "1 hour 59 seconds"},
+	{3660, "1 hour 1 minute"},
+	{3661, "1 hour 1 minute 1 second"},
+	{3719, "1 hour 1 minute 59 seconds"},
+	{3720, "1 hour 2 minutes"},
+	{3721, "1 hour 2 minutes 1 second"},
+	{7199, "1 hour 59 minutes 59 seconds"},
+	{7200, "2 hours"},
+	{7201, "2 hours 1 second"},
+	{7259, "2 hours 59 seconds"},
+	{7260, "2 hours 1 minute"},
+	{7261, "2 hours 1 minute 1 second"},
+	{7319, "2 hours 1 minute 59 seconds"},
+	{7320, "2 hours 2 minutes"},
+	{7321, "2 hours 2 minutes 1 second"},
+	{10799, "2 hours 59 minutes 59 seconds"},
+	{86400, "24 hours"},
+	{172800, "48 hours"},
+	{259200, "72 hours"},
+}
+
 func TestHourMinuteSecond(t *testing.T) {
-	var result string
-	var expected string
-
-	// 0 second
-	result = timestring.HourMinuteSecond(0)
-	expected = "0 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
+	for _, test := range hourMinuteSecondTests {
+		result := timestring.HourMinuteSecond(test.input)
+		expected := test.expected
+		if result != expected {
+			t.Errorf(
+				"got: %v\nwant: %v",
+				result, expected,
+			)
+		}
 	}
+}
 
-	// 1 second
-	result = timestring.HourMinuteSecond(1)
-	expected = "1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 59 seconds
-	result = timestring.HourMinuteSecond(59)
-	expected = "59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 minute
-	result = timestring.HourMinuteSecond(60)
-	expected = "1 minute"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 minute 1 second
-	result = timestring.HourMinuteSecond(61)
-	expected = "1 minute 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 minute 59 seconds
-	result = timestring.HourMinuteSecond(119)
-	expected = "1 minute 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 minutes
-	result = timestring.HourMinuteSecond(120)
-	expected = "2 minutes"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 minutes 1 second
-	result = timestring.HourMinuteSecond(121)
-	expected = "2 minutes 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 minutes 59 seconds
-	result = timestring.HourMinuteSecond(179)
-	expected = "2 minutes 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 59 minutes
-	result = timestring.HourMinuteSecond(3540)
-	expected = "59 minutes"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 59 minutes 1 second
-	result = timestring.HourMinuteSecond(3541)
-	expected = "59 minutes 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 59 minutes 59 seconds
-	result = timestring.HourMinuteSecond(3599)
-	expected = "59 minutes 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour
-	result = timestring.HourMinuteSecond(3600)
-	expected = "1 hour"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 1 second
-	result = timestring.HourMinuteSecond(3601)
-	expected = "1 hour 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 59 seconds
-	result = timestring.HourMinuteSecond(3659)
-	expected = "1 hour 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 1 minute
-	result = timestring.HourMinuteSecond(3660)
-	expected = "1 hour 1 minute"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 1 minute 1 second
-	result = timestring.HourMinuteSecond(3661)
-	expected = "1 hour 1 minute 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 1 minute 59 seconds
-	result = timestring.HourMinuteSecond(3719)
-	expected = "1 hour 1 minute 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 2 minutes
-	result = timestring.HourMinuteSecond(3720)
-	expected = "1 hour 2 minutes"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 2 minutes 1 second
-	result = timestring.HourMinuteSecond(3721)
-	expected = "1 hour 2 minutes 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 1 hour 59 minutes 59 seconds
-	result = timestring.HourMinuteSecond(7199)
-	expected = "1 hour 59 minutes 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours
-	result = timestring.HourMinuteSecond(7200)
-	expected = "2 hours"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 1 second
-	result = timestring.HourMinuteSecond(7201)
-	expected = "2 hours 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 59 seconds
-	result = timestring.HourMinuteSecond(7259)
-	expected = "2 hours 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 1 minute
-	result = timestring.HourMinuteSecond(7260)
-	expected = "2 hours 1 minute"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 1 minute 1 second
-	result = timestring.HourMinuteSecond(7261)
-	expected = "2 hours 1 minute 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 1 minute 59 seconds
-	result = timestring.HourMinuteSecond(7319)
-	expected = "2 hours 1 minute 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 2 minutes
-	result = timestring.HourMinuteSecond(7320)
-	expected = "2 hours 2 minutes"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 2 minutes 1 second
-	result = timestring.HourMinuteSecond(7321)
-	expected = "2 hours 2 minutes 1 second"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 2 hours 59 minutes 59 seconds
-	result = timestring.HourMinuteSecond(10799)
-	expected = "2 hours 59 minutes 59 seconds"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 24 hours
-	result = timestring.HourMinuteSecond(86400)
-	expected = "24 hours"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 48 hours
-	result = timestring.HourMinuteSecond(172800)
-	expected = "48 hours"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
-
-	// 72 hours
-	result = timestring.HourMinuteSecond(259200)
-	expected = "72 hours"
-	if result != expected {
-		t.Errorf(
-			"got: %v\nwant: %v",
-			result, expected,
-		)
-	}
+func ExampleHourMinuteSecond() {
+	fmt.Println(timestring.HourMinuteSecond(10799))
+	// Output: 2 hours 59 minutes 59 seconds
 }

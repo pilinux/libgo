@@ -7,7 +7,7 @@ import "strconv"
 // time in string: x hour(s) y minute(s) z second(s)
 func HourMinuteSecond(timeInSecond uint64) string {
 	if timeInSecond == 0 {
-		return strconv.FormatUint(timeInSecond, 10) + " second"
+		return second(timeInSecond)
 	}
 
 	var timeInMinute uint64
@@ -23,13 +23,7 @@ func HourMinuteSecond(timeInSecond uint64) string {
 
 	// seconds
 	if timeInSecond < 60 {
-		timeInSecondStr = strconv.FormatUint(timeInSecond, 10)
-		if timeInSecond == 1 {
-			timeInSecondStr += " second"
-		}
-		if timeInSecond > 1 {
-			timeInSecondStr += " seconds"
-		}
+		timeInSecondStr = second(timeInSecond)
 		return timeInSecondStr
 	}
 
@@ -38,23 +32,11 @@ func HourMinuteSecond(timeInSecond uint64) string {
 
 	remainingSecond = timeInSecond % 60
 	if remainingSecond > 0 {
-		remainingSecondStr = strconv.FormatUint(remainingSecond, 10)
-		if remainingSecond == 1 {
-			remainingSecondStr += " second"
-		}
-		if remainingSecond > 1 {
-			remainingSecondStr += " seconds"
-		}
+		remainingSecondStr = second(remainingSecond)
 	}
 
 	if timeInMinute < 60 {
-		timeInMinuteStr = strconv.FormatUint(timeInMinute, 10)
-		if timeInMinute == 1 {
-			timeInMinuteStr += " minute"
-		}
-		if timeInMinute > 1 {
-			timeInMinuteStr += " minutes"
-		}
+		timeInMinuteStr = minute(timeInMinute)
 
 		totalTimeStr := timeInMinuteStr
 		if remainingSecond > 0 {
@@ -68,22 +50,10 @@ func HourMinuteSecond(timeInSecond uint64) string {
 	timeInHour = timeInMinute / 60
 	remainingMinute = timeInMinute % 60
 	if remainingMinute > 0 {
-		remainingMinuteStr = strconv.FormatUint(remainingMinute, 10)
-		if remainingMinute == 1 {
-			remainingMinuteStr += " minute"
-		}
-		if remainingMinute > 1 {
-			remainingMinuteStr += " minutes"
-		}
+		remainingMinuteStr = minute(remainingMinute)
 	}
 
-	timeInHourStr = strconv.FormatUint(timeInHour, 10)
-	if timeInHour == 1 {
-		timeInHourStr += " hour"
-	}
-	if timeInHour > 1 {
-		timeInHourStr += " hours"
-	}
+	timeInHourStr = hour(timeInHour)
 
 	totalTimeStr := timeInHourStr
 	if remainingMinute > 0 {
@@ -94,4 +64,46 @@ func HourMinuteSecond(timeInSecond uint64) string {
 	}
 
 	return totalTimeStr
+}
+
+func second(timeInSecond uint64) string {
+	result := strconv.FormatUint(timeInSecond, 10)
+
+	if timeInSecond <= 1 {
+		result += " second"
+	}
+
+	if timeInSecond > 1 {
+		result += " seconds"
+	}
+
+	return result
+}
+
+func minute(timeInMinute uint64) string {
+	result := strconv.FormatUint(timeInMinute, 10)
+
+	if timeInMinute == 1 {
+		result += " minute"
+	}
+
+	if timeInMinute > 1 {
+		result += " minutes"
+	}
+
+	return result
+}
+
+func hour(timeInHour uint64) string {
+	result := strconv.FormatUint(timeInHour, 10)
+
+	if timeInHour == 1 {
+		result += " hour"
+	}
+
+	if timeInHour > 1 {
+		result += " hours"
+	}
+
+	return result
 }
